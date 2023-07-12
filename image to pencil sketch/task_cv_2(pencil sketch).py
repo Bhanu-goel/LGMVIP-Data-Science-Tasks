@@ -1,0 +1,26 @@
+import cv2
+image = cv2.imread("boy.jpeg",cv2.IMREAD_COLOR)
+cv2.imshow("image",image)
+cv2.imwrite("output1.jpeg",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+grey_filter = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+cv2.imshow("image",grey_filter)
+cv2.imwrite("output2.jpeg",grey_filter)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+invert = cv2.bitwise_not(grey_filter)
+blur = cv2.GaussianBlur(invert,(21,21),0)
+cv2.imshow("image",blur)
+cv2.imwrite("output3.jpeg",blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+invertedblur = cv2.bitwise_not(blur)
+sketch_filter = cv2.divide(grey_filter , invertedblur , scale=256.0)
+cv2.imshow("image",sketch_filter)
+cv2.imwrite("output4.jpeg",sketch_filter)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
